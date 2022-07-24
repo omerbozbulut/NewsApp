@@ -7,8 +7,9 @@
 
 import UIKit
 import SnapKit
+import UserNotifications
 
-class SplashViewController: UIViewController {
+final class SplashViewController: UIViewController {
 
     let customView: UIView = {
         let view = UIView()
@@ -93,7 +94,7 @@ class SplashViewController: UIViewController {
     func tabBarConfigure(){
         let tabBarVC = UITabBarController()
 
-        let newsVC = UINavigationController(rootViewController: NewsViewController())
+        let newsVC = UINavigationController(rootViewController: NewsBuilder.build())
         let favoriteVC = UINavigationController(rootViewController: FavoriteNewsViewController())
 
         newsVC.title = "News"
