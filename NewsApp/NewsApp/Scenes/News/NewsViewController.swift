@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NewsViewController: UIViewController {
+final class NewsViewController: UIViewController {
 
     lazy var searchController: UISearchController = {
         let searchController = UISearchController()
@@ -19,11 +19,21 @@ class NewsViewController: UIViewController {
         let tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = 80
+        tableView.rowHeight = 144
         tableView.register(NewsTableViewCell.self, forCellReuseIdentifier: Constants.newsTableViewIdentifier)
-        tableView.separatorColor = .black
         return tableView
     }()
+
+    var viewModel: ArticleViewModelProtocol
+
+    init(_ viewModel: ArticleViewModelProtocol){
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,10 +48,23 @@ class NewsViewController: UIViewController {
         [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 27),
          NSAttributedString.Key.foregroundColor: UIColor.red]
 
+        fetchData()
         navigationItem.searchController = searchController
         view.addSubview(tableView)
         configureConstraints()
     }
+
+    private func fetchData() {
+           viewModel.fetchArticles { [weak self] data in
+               guard let data = data?.articles else { return }
+               self?.viewModel.articles = data
+               DispatchQueue.main.async {
+                   self?.tableView.reloadData()
+               }
+           } onError: { error in
+               print(error)
+           }
+       }
 }
 //MARK: - Search News
 extension NewsViewController: UISearchResultsUpdating {
