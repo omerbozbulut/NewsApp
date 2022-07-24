@@ -28,7 +28,6 @@ import Foundation
 // MARK: - BaseResponse
 struct BaseResponse: Codable {
     let status: String
-    let totalResults: Int
     let articles: [Article]
 }
 
@@ -52,6 +51,5 @@ struct Article: Codable {
 
 // MARK: - Source
 struct Source: Codable {
-    let id: String?
     let name: String
 }
