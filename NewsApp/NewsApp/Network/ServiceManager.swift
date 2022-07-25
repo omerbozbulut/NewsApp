@@ -12,11 +12,11 @@ final class ServiceManager {
 
     func fetch<T: Codable>(path: String, onSuccess: @escaping (T) -> (), onError: (AFError) -> ()){
         AF.request(path, encoding: JSONEncoding.default).validate().responseDecodable(of: T.self) { response in
-            guard let model = response.value else {
+            guard let data = response.value else {
                 print(response.error as Any)
                 return
             }
-            onSuccess(model)
+            onSuccess(data)
         }
     }
 }
