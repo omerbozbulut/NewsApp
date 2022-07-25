@@ -85,7 +85,7 @@ final class SplashViewController: UIViewController {
         }
 
         tabBarVC.modalPresentationStyle = .fullScreen
-        tabBarVC.tabBar.tintColor = .black
+        tabBarVC.tabBar.tintColor = .red
         tabBarVC.tabBar.barTintColor = .white
         self.view.window?.rootViewController = tabBarVC
     }
