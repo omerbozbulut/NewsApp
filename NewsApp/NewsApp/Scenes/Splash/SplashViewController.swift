@@ -33,38 +33,14 @@ final class SplashViewController: UIViewController {
         configure()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        registerForRemoteNotification()
-    }
-
     func configure(){
         view.backgroundColor = .white
 
         view.addSubview(customView)
         customView.addSubview(titleLabel)
 
-        makeCustomViewConstraints()
-        makeTitleLabelConstraints()
-    }
-
-
-//MARK: - Constraints
-    func makeCustomViewConstraints() {
-        customView.snp.makeConstraints { make in
-            make.centerX.equalTo(view.snp.centerX)
-            make.centerY.equalTo(view.snp.centerY)
-            make.width.equalTo(200)
-            make.height.equalTo(100)
-        }
-    }
-
-    func makeTitleLabelConstraints() {
-        titleLabel.snp.makeConstraints { make in
-            make.centerX.equalTo(customView.snp.centerX)
-            make.centerY.equalTo(customView.snp.centerY)
-        }
+        configureConstraints()
+        registerForRemoteNotification()
     }
 
 
