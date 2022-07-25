@@ -35,8 +35,11 @@ class NewsTableViewCell: UITableViewCell {
 
     func configureArticle(_ article: Article) {
         titleLabel.text = article.title
-        guard let imageUrl = article.urlToImage else {return}
-        image.kf.setImage(with: URL(string: imageUrl))
+        if let imageUrl = article.urlToImage {
+            image.kf.setImage(with: URL(string: imageUrl))
+        } else {
+            image.kf.setImage(with: URL(string: Constants.nullImageUrl))
+        }
         sourceLabel.text = article.source?.name
     }
 
