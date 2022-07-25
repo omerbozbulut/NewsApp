@@ -20,9 +20,12 @@ final class NewsViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 144
+        tableView.separatorColor = .white
         tableView.register(NewsTableViewCell.self, forCellReuseIdentifier: Constants.newsTableViewIdentifier)
         return tableView
     }()
+
+    let refreshControl = UIRefreshControl()
 
     var viewModel: ArticleViewModelProtocol
 
@@ -43,7 +46,7 @@ final class NewsViewController: UIViewController {
         configure()
     }
 
-    func configure(){
+    private func configure(){
         self.navigationController?.navigationBar.titleTextAttributes =
         [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 27),
          NSAttributedString.Key.foregroundColor: UIColor.red]
@@ -52,20 +55,37 @@ final class NewsViewController: UIViewController {
         navigationItem.searchController = searchController
         view.addSubview(tableView)
         configureConstraints()
+
+        // Refresh Control
+        refreshControl.attributedTitle = NSAttributedString(string: "")
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        tableView.addSubview(refreshControl)
     }
 
+    @objc func refresh(_ sender: AnyObject) {
+        updateData()
+        refreshControl.endRefreshing()
+
+    }
+
+    private func updateData() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+
+//MARK: - Fetch Data
     private func fetchData() {
-           viewModel.fetchArticles { [weak self] data in
-               guard let data = data?.articles else { return }
-               self?.viewModel.articles = data
-               DispatchQueue.main.async {
-                   self?.tableView.reloadData()
-               }
-           } onError: { error in
-               print(error)
-           }
-       }
+        viewModel.fetchArticles { [weak self] data in
+            guard let data = data?.articles else { return }
+            self?.viewModel.articles = data
+            self?.updateData()
+        } onError: { error in
+            print(error)
+        }
+    }
 }
+
 //MARK: - Search News
 extension NewsViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
