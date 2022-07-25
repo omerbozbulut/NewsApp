@@ -63,7 +63,7 @@ final class NewsViewController: UIViewController {
     }
 
     @objc func refresh(_ sender: AnyObject) {
-        updateData()
+        fetchData()
         refreshControl.endRefreshing()
 
     }
