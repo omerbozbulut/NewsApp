@@ -8,6 +8,14 @@
 import UIKit
 
 extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let article = viewModel.articles[indexPath.row]
+        let destinationVC = NewsDetailViewController(article)
+        navigationController?.navigationBar.tintColor = .red
+        navigationController?.pushViewController(destinationVC, animated: true)
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.articles.count
     }
