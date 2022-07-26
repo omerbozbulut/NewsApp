@@ -8,12 +8,12 @@
 import Alamofire
 
 protocol ServiceProtocol {
-    func fetchNews(onSuccess: @escaping (BaseResponse) -> (), onError: @escaping (AFError) -> ())
+    func fetchNews(category: String? , searchText: String?, onSuccess: @escaping (BaseResponse) -> (), onError: @escaping (AFError) -> ())
 }
 
 final class WebService: ServiceProtocol {
-    func fetchNews(onSuccess: @escaping (BaseResponse) -> (), onError: @escaping (AFError) -> ()) {
-        ServiceManager.shared.fetch(path: Constants.ServiceEndPoint.newsServiceEndPoint()) { response in
+    func fetchNews(category: String?, searchText: String?, onSuccess: @escaping (BaseResponse) -> (), onError: @escaping (AFError) -> ()) {
+        ServiceManager.shared.fetch(path: Constants.ServiceEndPoint.newsServiceEndPoint(category: category, searchText: searchText)) { response in
             onSuccess(response)
         } onError: { error in
             onError(error)
