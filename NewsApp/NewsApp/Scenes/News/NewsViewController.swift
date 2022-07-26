@@ -25,9 +25,20 @@ final class NewsViewController: UIViewController {
         return tableView
     }()
 
+    private let filterButton: UIButton = {
+        let filterButton = UIButton(type: .system)
+        filterButton.setImage(UIImage(systemName: Constants.SymbolNames.listBulletCircle), for: .normal)
+        filterButton.tintColor = .black
+        filterButton.setTitle("", for: .normal)
+        filterButton.setTitleColor(.black, for: .normal)
+        return filterButton
+    }()
+
     let refreshControl = UIRefreshControl()
 
     var viewModel: ArticleViewModelProtocol
+
+    var selectedCategoryName: String? = nil
 
     init(_ viewModel: ArticleViewModelProtocol){
         self.viewModel = viewModel
@@ -43,6 +54,7 @@ final class NewsViewController: UIViewController {
         view.backgroundColor = .white
         title = "News"
 
+        fetchAllData()
         configure()
     }
 
@@ -51,47 +63,41 @@ final class NewsViewController: UIViewController {
         [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 27),
          NSAttributedString.Key.foregroundColor: UIColor.red]
 
-        fetchData()
+        filterButton.addTarget(self, action: #selector(newsFilter), for: .touchUpInside)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: filterButton)
         navigationItem.searchController = searchController
+
         view.addSubview(tableView)
         configureConstraints()
+        configureRefresh()
+    }
 
-        // Refresh Control
+    func updateData() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+
+    //MARK: - Refresh Control
+    func configureRefresh(){
         refreshControl.attributedTitle = NSAttributedString(string: "")
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         tableView.addSubview(refreshControl)
     }
 
     @objc func refresh(_ sender: AnyObject) {
-        fetchData()
+        fetchAllData()
         refreshControl.endRefreshing()
-
     }
 
-    private func updateData() {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-    }
-
-//MARK: - Fetch Data
-    private func fetchData() {
-        viewModel.fetchArticles { [weak self] data in
+    //MARK: - Fetch Data
+    func fetchAllData() {
+        viewModel.fetchArticles(category: nil, searchText: nil) { [weak self] data in
             guard let data = data?.articles else { return }
             self?.viewModel.articles = data
             self?.updateData()
         } onError: { error in
             print(error)
         }
-    }
-}
-
-//MARK: - Search News
-extension NewsViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        searchController.searchBar.searchTextField.textColor = .black
-
-        guard let text = searchController.searchBar.text else {return}
-        print(text)
     }
 }
