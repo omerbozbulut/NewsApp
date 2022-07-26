@@ -8,7 +8,7 @@
 import Alamofire
 
 protocol ArticleViewModelProtocol{
-    func fetchArticles(onSuccess: @escaping (BaseResponse?) -> Void, onError: @escaping (AFError) -> Void)
+    func fetchArticles(category: String? , searchText: String?, onSuccess: @escaping (BaseResponse?) -> Void, onError: @escaping (AFError) -> Void)
     var articles: [Article] { get set }
     var searchData: [Article] { get set }
 }
@@ -22,8 +22,8 @@ class NewsViewModel: ArticleViewModelProtocol {
         self.service = service
     }
 
-    func fetchArticles(onSuccess: @escaping (BaseResponse?) -> Void, onError: @escaping (AFError) -> Void) {
-        service.fetchNews { data in
+    func fetchArticles(category: String?, searchText: String?, onSuccess: @escaping (BaseResponse?) -> Void, onError: @escaping (AFError) -> Void) {
+        service.fetchNews(category: category, searchText: searchText) { data in
             onSuccess(data)
         } onError: { error in
             onError(error)
