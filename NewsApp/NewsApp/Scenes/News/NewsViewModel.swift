@@ -37,7 +37,7 @@ class NewsViewModel: ArticleInputProtocol {
     }
 
     func favoriteProcess(_ row: Int){
-        var favoriteNews = Favorites.shared.getFavoriteList()
+        var favoriteNews = FavoriteService.shared.getFavoriteList()
         let news = articles[row]
 
         if !news.isFavorite {
@@ -45,14 +45,14 @@ class NewsViewModel: ArticleInputProtocol {
                 articles[row].isFavorite = true
                 favoriteNews.append(news)
             }
-            Favorites.shared.setUserDefaults(favoriteNews)
+            FavoriteService.shared.setUserDefaults(favoriteNews)
             outputProtocol?.refresh()
         }
         else {
             for (index, element) in favoriteNews.enumerated() {
                 if element.title == news.title {
                     favoriteNews.remove(at: index)
-                    Favorites.shared.setUserDefaults(favoriteNews)
+                    FavoriteService.shared.setUserDefaults(favoriteNews)
                     articles[row].isFavorite = false
                 }
             }
