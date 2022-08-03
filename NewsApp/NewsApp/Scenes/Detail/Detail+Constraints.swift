@@ -18,7 +18,7 @@ extension NewsDetailViewController {
         makeAuthorLabelConstraints()
     }
 
-    func makeImageConstraints() {
+    private func makeImageConstraints() {
         image.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.leading.equalToSuperview().offset(16)
@@ -27,14 +27,14 @@ extension NewsDetailViewController {
         }
     }
 
-    func makeSourceLabelConstraints() {
+    private func makeSourceLabelConstraints() {
         sourceLabel.snp.makeConstraints { make in
             make.top.equalTo(image.snp.bottom).offset(16)
             make.leading.equalToSuperview().offset(16)
         }
     }
 
-    func makeDateLabelConstraints(){
+    private func makeDateLabelConstraints(){
         dateLabel.snp.makeConstraints { make in
             make.top.equalTo(image.snp.bottom).offset(16)
             make.leading.equalTo(sourceLabel.snp.trailing)
@@ -42,7 +42,7 @@ extension NewsDetailViewController {
         }
     }
 
-    func makeTitleLabelConstraints() {
+    private func makeTitleLabelConstraints() {
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(sourceLabel.snp.bottom).offset(16)
             make.leading.equalToSuperview().offset(16)
@@ -50,7 +50,7 @@ extension NewsDetailViewController {
         }
     }
 
-    func makeContentLabelConstraints() {
+    private func makeContentLabelConstraints() {
         contentLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(16)
             make.leading.equalToSuperview().offset(16)
@@ -58,11 +58,10 @@ extension NewsDetailViewController {
         }
     }
 
-    func makeAuthorLabelConstraints(){
+    private func makeAuthorLabelConstraints() {
         authorLabel.snp.makeConstraints { make in
             make.top.equalTo(contentLabel.snp.bottom).offset(32)
             make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
         }
     }
 }

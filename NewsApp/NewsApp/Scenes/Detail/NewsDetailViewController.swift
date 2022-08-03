@@ -57,7 +57,8 @@ final class NewsDetailViewController: UIViewController {
         return title
     }()
 
-    private let article: Article
+    let viewModel = DetailViewModel()
+    private var article: Article
 
     init(_ article: Article) {
         self.article = article
