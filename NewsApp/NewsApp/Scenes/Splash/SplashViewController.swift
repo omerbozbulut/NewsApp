@@ -70,11 +70,11 @@ final class SplashViewController: UIViewController {
     func tabBarConfigure(){
         let tabBarVC = UITabBarController()
 
-        let newsVC = UINavigationController(rootViewController: NewsBuilder.build())
-        let favoriteVC = UINavigationController(rootViewController: FavoriteNewsViewController())
+        let newsVC = UINavigationController(rootViewController: NewsBuilder.buildNews())
+        let favoriteVC = UINavigationController(rootViewController: FavoriteBuilder.buildFavorite())
 
-        newsVC.title = "News"
-        favoriteVC.title = "Favorite"
+        newsVC.title = NSLocalizedString("News", comment: "")
+        favoriteVC.title = NSLocalizedString("Favorite", comment: "")
 
         tabBarVC.setViewControllers([newsVC,favoriteVC], animated: false)
 
