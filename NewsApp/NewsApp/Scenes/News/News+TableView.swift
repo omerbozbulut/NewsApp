@@ -22,8 +22,11 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.newsTableViewIdentifier, for: indexPath) as? NewsTableViewCell else {return UITableViewCell()}
+
         let article = viewModel.articles[indexPath.row]
         cell.configureArticle(article)
+
+        cell.favoriteProcesses = {self.viewModel.favoriteProcess(indexPath.row)}
         cell.selectionStyle = .none
         return cell
     }
