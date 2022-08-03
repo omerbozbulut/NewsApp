@@ -11,7 +11,7 @@ import UIKit
 extension NewsViewController {
     @objc func newsFilter() {
 
-        let alert = UIAlertController(title: "Filter", message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: "Filter", message: nil, preferredStyle: .actionSheet)
 
         let All = UIAlertAction(title: "All", style: .default, handler: {(_) in
             self.fetchAllData()
@@ -22,13 +22,11 @@ extension NewsViewController {
 
         for categoryName in Constants.ServiceEndPointConverter.categoryNames {
             let Button = UIAlertAction(title: categoryName.0, style: .default, handler: {(_) in
-                self.viewModel.fetchArticles(category: categoryName.1, searchText: nil) { [weak self] data in
-                    guard let data = data?.articles else { return }
-                    self?.viewModel.articles = data
-                    self?.selectedCategoryName = categoryName.1
-                    self?.updateData()
-                } onError: { error in
-                    print(error)
+                self.viewModel.fetchArticles(category: categoryName.1, searchText: nil) { status in
+                    if status {
+                        self.selectedCategoryName = categoryName.1
+                        self.updateData()
+                    }
                 }
             })
             alert.addAction(Button)
@@ -47,12 +45,10 @@ extension NewsViewController: UISearchResultsUpdating {
         guard let text = searchController.searchBar.text else {return}
         let searchText = Constants.ServiceEndPointConverter.convertSearchText(searchText: text.isEmpty ? nil : text)
 
-        viewModel.fetchArticles(category: selectedCategoryName, searchText: searchText) { [weak self] data in
-            guard let data = data?.articles else { return }
-            self?.viewModel.articles = data
-            self?.updateData()
-        } onError: { error in
-            print(error)
+        viewModel.fetchArticles(category: nil, searchText: searchText) { status in
+            if status {
+                self.updateData()
+            }
         }
     }
 }
