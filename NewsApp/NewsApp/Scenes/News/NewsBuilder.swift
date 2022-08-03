@@ -8,7 +8,7 @@
 import UIKit
 
 final class NewsBuilder {
-    static func build() -> UIViewController {
+    static func buildNews() -> UIViewController {
         let service = WebService()
         let viewModel: NewsViewModel = NewsViewModel(service)
         let vc = NewsViewController(viewModel)
