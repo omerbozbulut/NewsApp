@@ -23,6 +23,7 @@ struct Article: Codable {
     let urlToImage: String?
     let publishedAt: String?
     let content: String?
+    var isFavorite = false
 
     enum CodingKeys: String, CodingKey {
         case source, author, title
