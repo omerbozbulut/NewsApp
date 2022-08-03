@@ -36,11 +36,11 @@ final class NewsViewController: UIViewController {
 
     let refreshControl = UIRefreshControl()
 
-    var viewModel: ArticleViewModelProtocol
+    var viewModel: NewsViewModel
 
     var selectedCategoryName: String? = nil
 
-    init(_ viewModel: ArticleViewModelProtocol){
+    init(_ viewModel: NewsViewModel){
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -52,8 +52,9 @@ final class NewsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        title = "News"
+        title = NSLocalizedString("News", comment: "")
 
+        viewModel.outputProtocol = self
         fetchAllData()
         configure()
     }
@@ -89,15 +90,18 @@ final class NewsViewController: UIViewController {
         fetchAllData()
         refreshControl.endRefreshing()
     }
-
-    //MARK: - Fetch Data
+    
     func fetchAllData() {
-        viewModel.fetchArticles(category: nil, searchText: nil) { [weak self] data in
-            guard let data = data?.articles else { return }
-            self?.viewModel.articles = data
-            self?.updateData()
-        } onError: { error in
-            print(error)
+        viewModel.fetchArticles(category: nil, searchText: nil) { status in
+            if status {
+                self.updateData()
+            }
         }
+    }
+}
+
+extension NewsViewController: ArticleOutputProtocol {
+    func refresh() {
+        updateData()
     }
 }
