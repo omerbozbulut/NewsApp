@@ -11,7 +11,7 @@ final class FavoriteNewsViewController: UIViewController {
 
     let titleLabel: UILabel = {
         let title = UILabel()
-        title.text = NSLocalizedString("Favorite news", comment: "")
+        title.text = NSLocalizedString(Constants.favoriteVCTitle, comment: "")
         title.font = UIFont(name: Constants.Fonts.TrebuchetMSBold, size: 33)
         return title
     }()

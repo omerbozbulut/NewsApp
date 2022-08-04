@@ -104,7 +104,7 @@ final class NewsDetailViewController: UIViewController {
 //MARK: - Elapsed time calculate
     func calculateElapsedTime(publishedDate: String?) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        dateFormatter.dateFormat = Constants.dateFormat
         let date = dateFormatter.date(from: publishedDate ?? "2022-07-25T17:11:11Z")
         guard let elapsedTime = date?.timeIntervalSinceNow else {return ""}
         return elapsedTime.stringFromTimeInterval()
