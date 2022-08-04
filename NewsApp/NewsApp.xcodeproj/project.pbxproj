@@ -38,7 +38,6 @@
 		17E01E56288D9EC300740B7E /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E01E55288D9EC300740B7E /* WebService.swift */; };
 		17EFA71D2899A40800AF59E9 /* FavoriteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EFA71C2899A40800AF59E9 /* FavoriteBuilder.swift */; };
 		17EFA71F2899A44D00AF59E9 /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EFA71E2899A44D00AF59E9 /* FavoriteViewModel.swift */; };
-		17EFA7212899A5C000AF59E9 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EFA7202899A5C000AF59E9 /* DetailViewModel.swift */; };
 		17EFA7232899A63E00AF59E9 /* FavoriteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EFA7222899A63E00AF59E9 /* FavoriteService.swift */; };
 		17EFA7252899AA9000AF59E9 /* Favorite+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EFA7242899AA9000AF59E9 /* Favorite+TableView.swift */; };
 		17EFA7272899AC3B00AF59E9 /* Favorite+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EFA7262899AC3B00AF59E9 /* Favorite+Constraints.swift */; };
@@ -97,7 +96,6 @@
 		17E01E55288D9EC300740B7E /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 		17EFA71C2899A40800AF59E9 /* FavoriteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteBuilder.swift; sourceTree = "<group>"; };
 		17EFA71E2899A44D00AF59E9 /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
-		17EFA7202899A5C000AF59E9 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		17EFA7222899A63E00AF59E9 /* FavoriteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteService.swift; sourceTree = "<group>"; };
 		17EFA7242899AA9000AF59E9 /* Favorite+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+TableView.swift"; sourceTree = "<group>"; };
 		17EFA7262899AC3B00AF59E9 /* Favorite+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+Constraints.swift"; sourceTree = "<group>"; };
@@ -253,7 +251,6 @@
 			children = (
 				17829711288C50F0004C7FD6 /* NewsDetailViewController.swift */,
 				173AF0B0288F17D700C5C124 /* Detail+Constraints.swift */,
-				17EFA7202899A5C000AF59E9 /* DetailViewModel.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -462,7 +459,6 @@
 				17EFA71F2899A44D00AF59E9 /* FavoriteViewModel.swift in Sources */,
 				17EFA7252899AA9000AF59E9 /* Favorite+TableView.swift in Sources */,
 				17EFA72A2899DE6700AF59E9 /* FavoriteTableCell.swift in Sources */,
-				17EFA7212899A5C000AF59E9 /* DetailViewModel.swift in Sources */,
 				17E01E54288D9E1B00740B7E /* ServiceManager.swift in Sources */,
 				17E01E52288D99BC00740B7E /* NewsCell+Constraints.swift in Sources */,
 				178296C6288C4D10004C7FD6 /* AppDelegate.swift in Sources */,
