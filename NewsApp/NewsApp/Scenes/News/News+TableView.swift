@@ -27,6 +27,7 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
         cell.configureArticle(article)
 
         cell.favoriteProcesses = {self.viewModel.favoriteProcess(indexPath.row)}
+        
         cell.selectionStyle = .none
         return cell
     }

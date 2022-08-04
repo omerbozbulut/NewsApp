@@ -10,6 +10,7 @@ import Foundation
 protocol ArticleInputProtocol{
     func fetchArticles(category: String?, searchText: String?, completion: @escaping ((Bool) -> Void))
     func favoriteProcess(_ row: Int)
+    func articleUpdateFavorite()
     var articles: [Article] { get set }
 }
 
@@ -57,6 +58,22 @@ class NewsViewModel: ArticleInputProtocol {
                 }
             }
             outputProtocol?.refresh()
+        }
+    }
+
+    func articleUpdateFavorite() {
+        let favoriteNews = FavoriteService.shared.getFavoriteList()
+
+        for (index, element) in articles.enumerated() {
+            for news in favoriteNews {
+                if element.title == news.title {
+                    articles[index].isFavorite = true
+                    break
+                }
+                else {
+                    articles[index].isFavorite = false
+                }
+            }
         }
     }
 }

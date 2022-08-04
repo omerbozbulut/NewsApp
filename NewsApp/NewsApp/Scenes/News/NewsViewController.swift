@@ -59,6 +59,12 @@ final class NewsViewController: UIViewController {
         configure()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.articleUpdateFavorite()
+        updateData()
+    }
+
     private func configure(){
         self.navigationController?.navigationBar.titleTextAttributes =
         [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 27),
@@ -94,6 +100,7 @@ final class NewsViewController: UIViewController {
     func fetchAllData() {
         viewModel.fetchArticles(category: nil, searchText: nil) { status in
             if status {
+                self.viewModel.articleUpdateFavorite()
                 self.updateData()
             }
         }
