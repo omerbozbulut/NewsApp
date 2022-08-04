@@ -45,7 +45,7 @@ extension NewsViewController: UISearchResultsUpdating {
         guard let text = searchController.searchBar.text else {return}
         let searchText = Constants.ServiceEndPointConverter.convertSearchText(searchText: text.isEmpty ? nil : text)
 
-        viewModel.fetchArticles(category: nil, searchText: searchText) { status in
+        viewModel.fetchArticles(category: selectedCategoryName, searchText: searchText) { status in
             if status {
                 self.updateData()
             }
