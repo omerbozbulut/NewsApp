@@ -239,9 +239,9 @@
 			isa = PBXGroup;
 			children = (
 				17829713288C517B004C7FD6 /* Constants.swift */,
-				17829702288C4EAF004C7FD6 /* Localizable.strings */,
 				173AF0B2288F20AC00C5C124 /* Extensions.swift */,
 				17EFA7222899A63E00AF59E9 /* FavoriteService.swift */,
+				17829702288C4EAF004C7FD6 /* Localizable.strings */,
 			);
 			path = Utilites;
 			sourceTree = "<group>";
@@ -258,11 +258,11 @@
 		1782970E288C50B7004C7FD6 /* Favorite */ = {
 			isa = PBXGroup;
 			children = (
-				1782970F288C50DF004C7FD6 /* FavoriteNewsViewController.swift */,
-				17EFA71C2899A40800AF59E9 /* FavoriteBuilder.swift */,
-				17EFA71E2899A44D00AF59E9 /* FavoriteViewModel.swift */,
-				17EFA7242899AA9000AF59E9 /* Favorite+TableView.swift */,
 				17EFA7262899AC3B00AF59E9 /* Favorite+Constraints.swift */,
+				17EFA7242899AA9000AF59E9 /* Favorite+TableView.swift */,
+				17EFA71C2899A40800AF59E9 /* FavoriteBuilder.swift */,
+				1782970F288C50DF004C7FD6 /* FavoriteNewsViewController.swift */,
+				17EFA71E2899A44D00AF59E9 /* FavoriteViewModel.swift */,
 			);
 			path = Favorite;
 			sourceTree = "<group>";
@@ -296,8 +296,8 @@
 		17EFA7282899DE4200AF59E9 /* FavoriteTableCell */ = {
 			isa = PBXGroup;
 			children = (
-				17EFA7292899DE6700AF59E9 /* FavoriteTableCell.swift */,
 				17EFA72B2899DE7600AF59E9 /* FavoriteCell+Constraints.swift */,
+				17EFA7292899DE6700AF59E9 /* FavoriteTableCell.swift */,
 			);
 			path = FavoriteTableCell;
 			sourceTree = "<group>";

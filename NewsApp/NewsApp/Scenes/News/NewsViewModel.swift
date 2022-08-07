@@ -8,7 +8,8 @@
 import Foundation
 
 protocol ArticleInputProtocol{
-    func fetchArticles(category: String?, searchText: String?, completion: @escaping ((Bool) -> Void))
+    func fetchArticles(category: String?, completion: @escaping ((Bool) -> Void))
+    func searchArticles(searchText: String, startingDate: String, endDate: String, completion: @escaping ((Bool) -> Void))
     func favoriteProcess(_ row: Int)
     func articleUpdateFavorite()
     var articles: [Article] { get set }
@@ -27,8 +28,8 @@ class NewsViewModel: ArticleInputProtocol {
         self.service = service
     }
 
-    func fetchArticles(category: String?, searchText: String?, completion: @escaping ((Bool) -> Void)) {
-        service.fetchNews(category: category, searchText: searchText) { data in
+    func fetchArticles(category: String?, completion: @escaping ((Bool) -> Void)) {
+        service.fetchNews(category: category) { data in
             self.articles = data.articles
             completion(true)
         } onError: { error in
@@ -36,6 +37,17 @@ class NewsViewModel: ArticleInputProtocol {
             print(error)
         }
     }
+
+    func searchArticles(searchText: String, startingDate: String, endDate: String, completion: @escaping ((Bool) -> Void)) {
+        service.fetchSearchNews(searchText: searchText, startingDate: startingDate, endDate: endDate) { data in
+            self.articles = data.articles
+            completion(true)
+        } onError: { error in
+            completion(false)
+            print(error)
+        }
+    }
+
 
     func favoriteProcess(_ row: Int){
         var favoriteNews = FavoriteService.shared.getFavoriteList()

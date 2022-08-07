@@ -22,7 +22,7 @@ extension NewsViewController {
 
         for categoryName in Constants.ServiceEndPointConverter.categoryNames {
             let Button = UIAlertAction(title: categoryName.0, style: .default, handler: {(_) in
-                self.viewModel.fetchArticles(category: categoryName.1, searchText: nil) { status in
+                self.viewModel.fetchArticles(category: categoryName.1) { status in
                     if status {
                         self.selectedCategoryName = categoryName.1
                         self.updateData()
@@ -42,13 +42,16 @@ extension NewsViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         searchController.searchBar.searchTextField.textColor = .black
 
-        guard let text = searchController.searchBar.text else {return}
-        let searchText = Constants.ServiceEndPointConverter.convertSearchText(searchText: text.isEmpty ? nil : text)
-
-        viewModel.fetchArticles(category: selectedCategoryName, searchText: searchText) { status in
-            if status {
-                self.updateData()
+        if let text = searchController.searchBar.text, !text.isEmpty {
+            viewModel.searchArticles(searchText:text, startingDate: getStartDate(), endDate: getEndDate()) { status in
+                if status {
+                    self.updateData()
+                }
             }
+        }
+        else {
+            fetchAllData()
         }
     }
 }
+

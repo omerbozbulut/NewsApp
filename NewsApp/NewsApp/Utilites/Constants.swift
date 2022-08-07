@@ -40,19 +40,34 @@ struct Constants {
                                     ("sports","&category=sports"),
                                     ("technology","&category=technology")]
 
-        static func convertSearchText(searchText: String?)-> String?{
-            guard let text = searchText else {return nil}
-            return "&q=\(text)"
+        static func DateFromConverter(date: String) -> String?{
+            if date.isEmpty {
+                return nil
+            }
+            return "&from=\(date)"
+        }
+
+        static func DateToConverter(date: String) -> String?{
+            if date.isEmpty {
+                return nil
+            }
+            return "&to=\(date)"
         }
     }
 
     enum ServiceEndPoint: String {
-        case BASE_URL = "https://newsapi.org/v2/top-headlines?"
+        case BASE_URL = "https://newsapi.org/v2/"
+        case topHeadlines = "top-headlines?"
+        case everything = "everything?"
         case COUNTRY = "&country=us"
-        case API_KEY = "apiKey=fcc9c8c235b443cfaecb60d5983a14e7"
+        case API_KEY = "apiKey=2f0863b0310d4c948e58c0f336654456"
 
-        static func newsServiceEndPoint(category: String?, searchText: String?) -> String {
-            "\(BASE_URL.rawValue)\(API_KEY.rawValue)\(COUNTRY.rawValue)\(category ?? "")\(searchText ?? "")"
+        static func newsServiceEndPoint(category: String?) -> String {
+            "\(BASE_URL.rawValue)\(topHeadlines.rawValue)\(API_KEY.rawValue)\(COUNTRY.rawValue)\(category ?? "")"
+        }
+
+        static func newsServiceSearchEndPoint(searchText: String, startingDate: String, endDate: String) -> String {
+            "\(BASE_URL.rawValue)\(everything.rawValue)\(API_KEY.rawValue)&q=\(searchText)\(Constants.ServiceEndPointConverter.DateFromConverter(date: startingDate) ?? "")\(Constants.ServiceEndPointConverter.DateToConverter(date: endDate) ?? "")"
         }
     }
 }

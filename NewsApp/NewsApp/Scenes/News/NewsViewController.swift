@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 final class NewsViewController: UIViewController {
 
@@ -34,15 +35,45 @@ final class NewsViewController: UIViewController {
         return filterButton
     }()
 
+    let emptyView: UIView = {
+        let view = UIView()
+        return view
+    }()
+
+    let dateStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.distribution = .fillEqually
+        return stack
+    }()
+
+    lazy var startingDate: UIDatePicker = {
+        let date = UIDatePicker()
+        date.datePickerMode = .date
+        date.addTarget(self, action: #selector(dateValueChanged(picker:)), for: .valueChanged)
+        return date
+    }()
+
+    lazy var endDate: UIDatePicker = {
+        let date = UIDatePicker()
+        date.datePickerMode = .date
+        date.addTarget(self, action: #selector(dateValueChanged(picker:)), for: .valueChanged)
+        return date
+    }()
+
     let refreshControl = UIRefreshControl()
 
     var viewModel: NewsViewModel
 
+    let dateFormatter = DateFormatter()
     var selectedCategoryName: String? = nil
+    var startingDateString = ""
+    var endDateString = ""
 
     init(_ viewModel: NewsViewModel){
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+
     }
 
     required init?(coder: NSCoder) {
@@ -74,9 +105,32 @@ final class NewsViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: filterButton)
         navigationItem.searchController = searchController
 
+        dateStackView.addArrangedSubview(startingDate)
+        dateStackView.addArrangedSubview(emptyView)
+        dateStackView.addArrangedSubview(endDate)
+        view.addSubview(dateStackView)
         view.addSubview(tableView)
         configureConstraints()
         configureRefresh()
+    }
+
+    //MARK: - Date picker changed value
+    @objc func dateValueChanged(picker: UIDatePicker){
+        updateSearchResults(for: searchController)
+    }
+
+    func getStartDate()->String{
+        let date = startingDate.date
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let dateString = dateFormatter.string(from: date)
+        return dateString
+    }
+
+    func getEndDate()->String{
+        let date = endDate.date
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let dateString = dateFormatter.string(from: date)
+        return dateString
     }
 
     func updateData() {
@@ -98,12 +152,20 @@ final class NewsViewController: UIViewController {
     }
     
     func fetchAllData() {
-        viewModel.fetchArticles(category: nil, searchText: nil) { status in
+        viewModel.fetchArticles(category: nil) { status in
             if status {
                 self.viewModel.articleUpdateFavorite()
                 self.updateData()
             }
         }
+    }
+
+    func convertDateFormat(dateString: String)-> String{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        guard let date = dateFormatter.date(from: dateString) else { return "" }
+        let resultString = dateFormatter.string(from: date)
+        return resultString
     }
 }
 
