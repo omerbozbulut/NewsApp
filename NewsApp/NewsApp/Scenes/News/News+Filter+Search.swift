@@ -25,6 +25,7 @@ extension NewsViewController {
                 self.viewModel.fetchArticles(category: categoryName.1) { status in
                     if status {
                         self.selectedCategoryName = categoryName.1
+                        self.viewModel.articleUpdateFavorite()
                         self.updateData()
                     }
                 }
