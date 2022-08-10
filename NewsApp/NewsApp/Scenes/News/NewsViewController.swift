@@ -62,10 +62,9 @@ final class NewsViewController: UIViewController {
     }()
 
     let refreshControl = UIRefreshControl()
-
-    var viewModel: NewsViewModel
-
     let dateFormatter = DateFormatter()
+    let viewModel: NewsViewModel
+
     var selectedCategoryName: String? = nil
     var startingDateString = ""
     var endDateString = ""
@@ -112,35 +111,28 @@ final class NewsViewController: UIViewController {
         view.addSubview(tableView)
         configureConstraints()
         configureRefresh()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
     }
 
-    //MARK: - Date picker changed value
+//MARK: - Date picker
     @objc func dateValueChanged(picker: UIDatePicker){
         updateSearchResults(for: searchController)
     }
 
-    func getStartDate()->String{
+    func getStartDate() -> String {
         let date = startingDate.date
-        dateFormatter.dateFormat = "yyyy-MM-dd"
         let dateString = dateFormatter.string(from: date)
         return dateString
     }
 
-    func getEndDate()->String{
+    func getEndDate() -> String {
         let date = endDate.date
-        dateFormatter.dateFormat = "yyyy-MM-dd"
         let dateString = dateFormatter.string(from: date)
         return dateString
-    }
-
-    func updateData() {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
     }
 
     //MARK: - Refresh Control
-    func configureRefresh(){
+    func configureRefresh() {
         refreshControl.attributedTitle = NSAttributedString(string: "")
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         tableView.addSubview(refreshControl)
@@ -150,7 +142,14 @@ final class NewsViewController: UIViewController {
         fetchAllData()
         refreshControl.endRefreshing()
     }
-    
+
+    func updateData() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+
+    // top-headlines data
     func fetchAllData() {
         viewModel.fetchArticles(category: nil) { status in
             if status {
@@ -160,9 +159,8 @@ final class NewsViewController: UIViewController {
         }
     }
 
-    func convertDateFormat(dateString: String)-> String{
+    func convertDateFormat(dateString: String) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
         guard let date = dateFormatter.date(from: dateString) else { return "" }
         let resultString = dateFormatter.string(from: date)
         return resultString

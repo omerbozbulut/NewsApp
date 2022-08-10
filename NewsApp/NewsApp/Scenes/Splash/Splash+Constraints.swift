@@ -20,7 +20,7 @@ extension SplashViewController {
             make.centerX.equalTo(view.snp.centerX)
             make.centerY.equalTo(view.snp.centerY)
             make.width.equalTo(200)
-            make.height.equalTo(100)
+            make.height.equalTo(104)
         }
     }
 

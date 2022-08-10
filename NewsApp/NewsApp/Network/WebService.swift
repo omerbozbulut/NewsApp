@@ -7,12 +7,12 @@
 
 import Alamofire
 
-protocol ServiceProtocol {
+protocol WebServiceProtocol {
     func fetchNews(category: String?, onSuccess: @escaping (BaseResponse) -> (), onError: @escaping (AFError) -> ())
     func fetchSearchNews(searchText: String, startingDate: String, endDate: String,  onSuccess: @escaping (BaseResponse) -> (), onError: @escaping (AFError) -> ())
 }
 
-final class WebService: ServiceProtocol {
+final class WebService: WebServiceProtocol {
     func fetchNews(category: String?, onSuccess: @escaping (BaseResponse) -> (), onError: @escaping (AFError) -> ()) {
         ServiceManager.shared.fetch(path: Constants.ServiceEndPoint.newsServiceEndPoint(category: category)) { response in
             onSuccess(response)

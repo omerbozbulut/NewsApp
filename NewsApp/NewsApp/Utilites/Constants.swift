@@ -16,17 +16,14 @@ struct Constants {
     static let nullImageUrl = "https://img.freepik.com/free-vector/tiny-people-examining-operating-system-error-warning-web-page-isolated-flat-illustration_74855-11104.jpg?t=st=1658778171~exp=1658778771~hmac=e0e894e370eb1bcdbbc2530ca55ad932d3c6da8b19efb37c6d2ef7cf91d8833c&w=1480"
     
     struct Fonts {
-            static let TrebuchetMSBold = "TrebuchetMS-Bold"
-            static let helvetica = "Helvetica"
-            static let helveticaBOLD = "Helvetica-Bold"
-            static let helveticaMedium = "HelveticaNeue-Medium"
+        static let TrebuchetMSBold = "TrebuchetMS-Bold"
+        static let helvetica = "Helvetica"
+        static let helveticaBOLD = "Helvetica-Bold"
+        static let helveticaMedium = "HelveticaNeue-Medium"
     }
 
     struct SymbolNames {
-           static let starSymbolName = "star.fill"
-           static let bookmarkSymbolName = "bookmark"
-           static let bookmarkFillSymbolName = "bookmark.fill"
-           static let listBulletCircle = "list.bullet.circle"
+        static let listBulletCircle = "list.bullet.circle"
     }
 
 

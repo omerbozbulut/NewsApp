@@ -17,10 +17,10 @@ extension FavoriteTableCell {
 
     func makeImageConstraints() {
         image.snp.makeConstraints { make in
-            make.top.equalTo(contentView.snp.top).offset(16)
-            make.leading.equalTo(contentView.snp.leading).offset(16)
+            make.top.equalToSuperview().offset(16)
+            make.leading.equalToSuperview().offset(16)
             make.bottom.equalToSuperview().offset(-16)
-            make.width.equalTo(156)
+            make.width.equalTo(160)
         }
     }
 

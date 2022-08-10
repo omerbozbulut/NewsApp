@@ -21,7 +21,7 @@ final class SplashViewController: UIViewController {
 
     let titleLabel: UILabel = {
         let title = UILabel()
-        title.text = "News App"
+        title.text = NSLocalizedString("News App", comment: "")
         title.textColor = .white
         title.font = UIFont(name: Constants.Fonts.helveticaBOLD, size: 30)
         return title

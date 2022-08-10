@@ -15,7 +15,7 @@
 		178296CA288C4D10004C7FD6 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178296C9288C4D10004C7FD6 /* NewsViewController.swift */; };
 		178296CF288C4D12004C7FD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 178296CE288C4D12004C7FD6 /* Assets.xcassets */; };
 		178296D2288C4D12004C7FD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 178296D0288C4D12004C7FD6 /* LaunchScreen.storyboard */; };
-		178296DD288C4D12004C7FD6 /* NewsAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178296DC288C4D12004C7FD6 /* NewsAppTests.swift */; };
+		178296DD288C4D12004C7FD6 /* ServiceManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178296DC288C4D12004C7FD6 /* ServiceManagerTests.swift */; };
 		178296E7288C4D12004C7FD6 /* NewsAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178296E6288C4D12004C7FD6 /* NewsAppUITests.swift */; };
 		178296E9288C4D12004C7FD6 /* NewsAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178296E8288C4D12004C7FD6 /* NewsAppUITestsLaunchTests.swift */; };
 		178296F9288C4E2C004C7FD6 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178296F8288C4E2C004C7FD6 /* SplashViewController.swift */; };
@@ -74,7 +74,7 @@
 		178296D1288C4D12004C7FD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		178296D3288C4D12004C7FD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		178296D8288C4D12004C7FD6 /* NewsAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewsAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		178296DC288C4D12004C7FD6 /* NewsAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsAppTests.swift; sourceTree = "<group>"; };
+		178296DC288C4D12004C7FD6 /* ServiceManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManagerTests.swift; sourceTree = "<group>"; };
 		178296E2288C4D12004C7FD6 /* NewsAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewsAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		178296E6288C4D12004C7FD6 /* NewsAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsAppUITests.swift; sourceTree = "<group>"; };
 		178296E8288C4D12004C7FD6 /* NewsAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -167,7 +167,7 @@
 		178296DB288C4D12004C7FD6 /* NewsAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				178296DC288C4D12004C7FD6 /* NewsAppTests.swift */,
+				178296DC288C4D12004C7FD6 /* ServiceManagerTests.swift */,
 			);
 			path = NewsAppTests;
 			sourceTree = "<group>";
@@ -478,7 +478,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				178296DD288C4D12004C7FD6 /* NewsAppTests.swift in Sources */,
+				178296DD288C4D12004C7FD6 /* ServiceManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

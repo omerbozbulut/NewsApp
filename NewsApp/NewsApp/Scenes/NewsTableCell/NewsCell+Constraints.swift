@@ -20,7 +20,7 @@ extension NewsTableViewCell {
         image.snp.makeConstraints { make in
             make.leading.top.equalToSuperview().offset(16)
             make.bottom.equalToSuperview().offset(-16)
-            make.width.equalTo(156)
+            make.width.equalTo(160)
         }
     }
 

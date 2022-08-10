@@ -21,10 +21,10 @@ protocol ArticleOutputProtocol {
 
 class NewsViewModel: ArticleInputProtocol {
     var outputProtocol: ArticleOutputProtocol?
-    var service: ServiceProtocol
+    var service: WebServiceProtocol
     var articles =  [Article]()
     
-    init(_ service: ServiceProtocol){
+    init(_ service: WebServiceProtocol){
         self.service = service
     }
 
@@ -48,7 +48,7 @@ class NewsViewModel: ArticleInputProtocol {
         }
     }
 
-
+    // add/remove favorite
     func favoriteProcess(_ row: Int){
         var favoriteNews = FavoriteService.shared.getFavoriteList()
         let news = articles[row]
@@ -73,6 +73,7 @@ class NewsViewModel: ArticleInputProtocol {
         }
     }
 
+    // isFavorite control
     func articleUpdateFavorite() {
         let favoriteNews = FavoriteService.shared.getFavoriteList()
 

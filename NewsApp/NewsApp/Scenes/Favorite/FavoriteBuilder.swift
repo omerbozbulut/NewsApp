@@ -10,7 +10,7 @@ import UIKit
 final class FavoriteBuilder {
     static func buildFavorite() -> UIViewController{
         let viewModel = FavoriteViewModel(FavoriteService.shared.getFavoriteList())
-        let controller = FavoriteNewsViewController(viewModel)
-        return controller
+        let viewController = FavoriteNewsViewController(viewModel)
+        return viewController
     }
 }

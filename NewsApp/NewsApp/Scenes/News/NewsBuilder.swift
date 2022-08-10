@@ -11,7 +11,7 @@ final class NewsBuilder {
     static func buildNews() -> UIViewController {
         let service = WebService()
         let viewModel: NewsViewModel = NewsViewModel(service)
-        let vc = NewsViewController(viewModel)
-        return vc
+        let viewController = NewsViewController(viewModel)
+        return viewController
     }
 }
