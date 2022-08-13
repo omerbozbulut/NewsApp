@@ -72,7 +72,6 @@ final class NewsViewController: UIViewController {
     init(_ viewModel: NewsViewModel){
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-
     }
 
     required init?(coder: NSCoder) {
@@ -81,18 +80,24 @@ final class NewsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        title = NSLocalizedString("News", comment: "")
 
-        viewModel.outputProtocol = self
         fetchAllData()
+        view.backgroundColor = .white
+        title = "News".localized()
         configure()
+        
+        viewModel.refreshData = {
+            self.updateData()
+        }
+
+        viewModel.dataError = { error in
+            self.dataErrorAlert(error)
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.articleUpdateFavorite()
-        updateData()
     }
 
     private func configure(){
@@ -151,12 +156,7 @@ final class NewsViewController: UIViewController {
 
     // top-headlines data
     func fetchAllData() {
-        viewModel.fetchArticles(category: nil) { status in
-            if status {
-                self.viewModel.articleUpdateFavorite()
-                self.updateData()
-            }
-        }
+        viewModel.fetchArticles(category: nil)
     }
 
     func convertDateFormat(dateString: String) -> String {
@@ -164,11 +164,5 @@ final class NewsViewController: UIViewController {
         guard let date = dateFormatter.date(from: dateString) else { return "" }
         let resultString = dateFormatter.string(from: date)
         return resultString
-    }
-}
-
-extension NewsViewController: ArticleOutputProtocol {
-    func refresh() {
-        updateData()
     }
 }

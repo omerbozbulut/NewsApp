@@ -8,43 +8,50 @@
 import Foundation
 
 protocol ArticleInputProtocol{
-    func fetchArticles(category: String?, completion: @escaping ((Bool) -> Void))
-    func searchArticles(searchText: String, startingDate: String, endDate: String, completion: @escaping ((Bool) -> Void))
+    func fetchArticles(category: String?)
+    func searchArticles(searchText: String, startingDate: String, endDate: String)
+    func searchRequest(text: String?, startingDate: String, endDate: String)
     func favoriteProcess(_ row: Int)
     func articleUpdateFavorite()
     var articles: [Article] { get set }
 }
 
-protocol ArticleOutputProtocol {
-    func refresh()
-}
-
 class NewsViewModel: ArticleInputProtocol {
-    var outputProtocol: ArticleOutputProtocol?
     var service: WebServiceProtocol
     var articles =  [Article]()
-    
+
+    var refreshData: (() -> Void)?
+    var dataError: ((_ error: Error) -> Void)?
+
     init(_ service: WebServiceProtocol){
         self.service = service
     }
 
-    func fetchArticles(category: String?, completion: @escaping ((Bool) -> Void)) {
+    func fetchArticles(category: String?) {
         service.fetchNews(category: category) { data in
             self.articles = data.articles
-            completion(true)
+            self.articleUpdateFavorite()
+            self.refreshData?()
         } onError: { error in
-            completion(false)
-            print(error)
+            self.dataError?(error)
         }
     }
 
-    func searchArticles(searchText: String, startingDate: String, endDate: String, completion: @escaping ((Bool) -> Void)) {
+    func searchArticles(searchText: String, startingDate: String, endDate: String) {
         service.fetchSearchNews(searchText: searchText, startingDate: startingDate, endDate: endDate) { data in
             self.articles = data.articles
-            completion(true)
+            self.articleUpdateFavorite()
+            self.refreshData?()
         } onError: { error in
-            completion(false)
-            print(error)
+            self.dataError?(error)
+        }
+    }
+
+    func searchRequest(text: String?, startingDate: String, endDate: String) {
+        if let textString = text, !textString.isEmpty {
+            searchArticles(searchText: textString, startingDate: startingDate, endDate: endDate)
+        } else {
+            fetchArticles(category: nil)
         }
     }
 
@@ -59,7 +66,7 @@ class NewsViewModel: ArticleInputProtocol {
                 favoriteNews.append(news)
             }
             FavoriteService.shared.setUserDefaults(favoriteNews)
-            outputProtocol?.refresh()
+            refreshData?()
         }
         else {
             for (index, element) in favoriteNews.enumerated() {
@@ -69,14 +76,14 @@ class NewsViewModel: ArticleInputProtocol {
                     articles[row].isFavorite = false
                 }
             }
-            outputProtocol?.refresh()
+            refreshData?()
         }
     }
 
     // isFavorite control
     func articleUpdateFavorite() {
         let favoriteNews = FavoriteService.shared.getFavoriteList()
-
+        
         for (index, element) in articles.enumerated() {
             for news in favoriteNews {
                 if element.title == news.title {
@@ -88,6 +95,7 @@ class NewsViewModel: ArticleInputProtocol {
                 }
             }
         }
+        refreshData?()
     }
 }
 

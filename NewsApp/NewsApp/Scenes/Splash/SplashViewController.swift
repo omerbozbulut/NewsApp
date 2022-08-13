@@ -21,7 +21,7 @@ final class SplashViewController: UIViewController {
 
     let titleLabel: UILabel = {
         let title = UILabel()
-        title.text = NSLocalizedString("News App", comment: "")
+        title.text = "News App".localized()
         title.textColor = .white
         title.font = UIFont(name: Constants.Fonts.helveticaBOLD, size: 30)
         return title
@@ -73,8 +73,8 @@ final class SplashViewController: UIViewController {
         let newsVC = UINavigationController(rootViewController: NewsBuilder.buildNews())
         let favoriteVC = UINavigationController(rootViewController: FavoriteBuilder.buildFavorite())
 
-        newsVC.title = NSLocalizedString("News", comment: "")
-        favoriteVC.title = NSLocalizedString("Favorite", comment: "")
+        newsVC.title = "News".localized()
+        favoriteVC.title = "Favorite".localized()
 
         tabBarVC.setViewControllers([newsVC,favoriteVC], animated: false)
 

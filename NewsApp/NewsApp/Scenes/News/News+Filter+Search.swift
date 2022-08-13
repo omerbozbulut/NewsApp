@@ -22,13 +22,9 @@ extension NewsViewController {
 
         for categoryName in Constants.ServiceEndPointConverter.categoryNames {
             let Button = UIAlertAction(title: categoryName.0, style: .default, handler: {(_) in
-                self.viewModel.fetchArticles(category: categoryName.1) { status in
-                    if status {
-                        self.selectedCategoryName = categoryName.1
-                        self.viewModel.articleUpdateFavorite()
-                        self.updateData()
-                    }
-                }
+                self.viewModel.fetchArticles(category: categoryName.1)
+                self.selectedCategoryName = categoryName.1
+                self.viewModel.articleUpdateFavorite()
             })
             alert.addAction(Button)
         }
@@ -36,23 +32,20 @@ extension NewsViewController {
         alert.addAction(cancel)
         self.present(alert, animated: true)
     }
+    
+    func dataErrorAlert(_ error: Error) {
+        let notFoundDataAlert = UIAlertController(title: "Error!", message: error.localizedDescription, preferredStyle: .alert)
+        let Cancel = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil)
+        notFoundDataAlert.addAction(Cancel)
+        present(notFoundDataAlert, animated: true)
+    }
 }
+
 
 //MARK: - Search News
 extension NewsViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         searchController.searchBar.searchTextField.textColor = .black
-
-        if let text = searchController.searchBar.text, !text.isEmpty {
-            viewModel.searchArticles(searchText:text, startingDate: getStartDate(), endDate: getEndDate()) { status in
-                if status {
-                    self.updateData()
-                }
-            }
-        }
-        else {
-            fetchAllData()
-        }
+        viewModel.searchRequest(text: searchController.searchBar.text, startingDate: getStartDate(), endDate: getEndDate())
     }
 }
-

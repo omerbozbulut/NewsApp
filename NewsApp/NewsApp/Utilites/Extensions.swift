@@ -14,3 +14,9 @@ extension TimeInterval{
         return String(format: "%2d hours ago",hours)
     }
 }
+
+extension String {
+    func localized() -> String {
+        return NSLocalizedString(self, comment: self)
+    }
+}
